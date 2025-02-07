@@ -5,6 +5,7 @@ import Home from './containers/Home/Home.tsx';
 import Add from './containers/Add/Add.tsx';
 import AboutUs from './containers/AboutUs/AboutUs.tsx';
 import Contacts from './containers/Contacts/Contacts.tsx';
+import PostFullInfo from './components/PostFullInfo/PostFullInfo.tsx';
 
 const App = () => {
   return (
@@ -18,13 +19,15 @@ const App = () => {
                  element={<Home/>}/>
           <Route path="/posts"
                  element={<Home/>}/>
-          <Route path='/posts/new-post'
+          <Route path="/posts/:id"
+                 element={<PostFullInfo/>}/>
+          <Route path="/posts/new-post"
                  element={<Add/>}/>
-          <Route path='/posts/about'
+          <Route path="/posts/about"
                  element={<AboutUs/>}/>
-          <Route path='/posts/contacts'
-                 element={<Contacts/>}/>
-          <Route path='*'
+          <Route path="/posts/contacts"
+                 element={(<Contacts/>)}/>
+          <Route path="*"
                  element={<h1>Not found page</h1>}/>
         </Routes>
       </Container>

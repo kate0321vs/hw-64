@@ -1,6 +1,7 @@
 import { Button, Card, CardActions, CardContent, Typography } from '@mui/material';
 import { IPost } from '../../types';
 import dayjs from 'dayjs';
+import { NavLink } from 'react-router-dom';
 
 interface Props {
   post: IPost;
@@ -19,7 +20,7 @@ const PostItem: React.FC<Props> = ({post}) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Read more</Button>
+        <Button component={NavLink} to={`/posts/${post.id}`}  size="small">Read more</Button>
       </CardActions>
     </Card>
   );
