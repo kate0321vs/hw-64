@@ -6,6 +6,7 @@ import Add from './containers/Add/Add.tsx';
 import AboutUs from './containers/AboutUs/AboutUs.tsx';
 import Contacts from './containers/Contacts/Contacts.tsx';
 import PostFullInfo from './components/PostFullInfo/PostFullInfo.tsx';
+import EditPost from './components/EditPost/EditPost.tsx';
 
 const App = () => {
   return (
@@ -21,6 +22,8 @@ const App = () => {
                  element={<Home/>}/>
           <Route path="/posts/:id"
                  element={<PostFullInfo/>}/>
+          <Route path="/posts/:id/edit"
+                 element={<EditPost/>}/>
           <Route path="/posts/new-post"
                  element={<Add/>}/>
           <Route path="/posts/about"

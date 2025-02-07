@@ -1,11 +1,16 @@
 import { Button, TextField, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { IPostForm } from '../../types';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useState } from 'react';
+import axiosApi from '../../axiosApi.ts';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import Loader from '../UI/Loader/Loader.tsx';
 
 interface Props {
   isEdit?: boolean;
-  onSubmitAction: (post: IPostForm) => void
+  onSubmitAction: (post: IPostForm) => void;
+  id?: string;
 }
 
 const initialState = {
@@ -14,8 +19,35 @@ const initialState = {
   date: '',
 }
 
-const PostForm: React.FC<Props> = ({isEdit = false, onSubmitAction}) => {
+const PostForm: React.FC<Props> = ({isEdit = false, onSubmitAction, id}) => {
   const [form, setForm] = useState<IPostForm>(initialState);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const fetchApiPosts = useCallback(async () => {
+    if (!isEdit) {
+      return
+    }
+    try {
+      setLoading(true);
+      const response = await axiosApi<IPostForm>(`posts/${id}.json`);
+
+      if (!response.data) {
+        toast.error('Game not found');
+        navigate('/');
+        return
+      }
+      setForm(response.data);
+    } catch (e) {
+      alert(e);
+    } finally {
+      setLoading(false);
+    }
+  }, [isEdit, id]);
+
+  useEffect(() => {
+    void fetchApiPosts()
+  }, [fetchApiPosts])
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -28,8 +60,9 @@ const PostForm: React.FC<Props> = ({isEdit = false, onSubmitAction}) => {
   }
 
   return (
+    loading ? <Loader/> :
     <form onSubmit={onSubmit}>
-      <Typography variant="h4" sx={{flexGrow: 1, textAlign: 'center'}}>{isEdit ? 'Edit' : 'Add new '}
+      <Typography variant="h4" sx={{flexGrow: 1, textAlign: 'center'}}>{isEdit ? 'Edit ' : 'Add new '}
         post</Typography>
 
       <Grid container spacing={2} sx={{mx: 'auto', width: '50%', mt: 4}}>
