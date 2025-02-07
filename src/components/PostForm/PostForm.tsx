@@ -47,9 +47,12 @@ const PostForm: React.FC<Props> = ({isEdit = false, onSubmitAction}) => {
                      label="Description"
                      name="description"
                      variant="outlined"
+                     multiline
+                     rows={3}
                      value={form.description}
                      onChange={onInputChange}
                      required/>
+
         </Grid>
         <Grid size={12}>
           <Button sx={{width: '100%'}} type="submit" variant="contained">{isEdit ? 'Edit' : 'Add'}</Button>
