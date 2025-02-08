@@ -5,7 +5,6 @@ import Loader from '../../components/UI/Loader/Loader.tsx';
 import Grid from '@mui/material/Grid2';
 import PostItem from '../../components/PostItem/PostItem.tsx';
 
-
 const Home = () => {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [loading, setLoading] = useState(false);
@@ -17,7 +16,6 @@ const Home = () => {
       if (response.data) {
         const postsObject = response.data;
         const postsObjectKeys = Object.keys(postsObject);
-        console.log(postsObjectKeys);
         const postsArr = postsObjectKeys.map(key => {
           return {
             id: key,
@@ -38,8 +36,6 @@ const Home = () => {
   useEffect(() => {
     void fetchPosts();
   }, [fetchPosts]);
-
-  console.log(posts);
 
   let allPosts = null;
 

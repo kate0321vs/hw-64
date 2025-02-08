@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const NavBar = () => {
   return (
-    <Box sx={{ flexGrow: 1, mb: 5}}>
+    <Box sx={{mb: 5}}>
       <AppBar position="static">
         <Toolbar>
           <Typography

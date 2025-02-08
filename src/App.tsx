@@ -10,11 +10,11 @@ import EditPost from './components/EditPost/EditPost.tsx';
 
 const App = () => {
   return (
-    <div>
+    <>
       <header>
         <NavBar/>
       </header>
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Routes>
           <Route path="/"
                  element={<Home/>}/>
@@ -34,7 +34,7 @@ const App = () => {
                  element={<h1>Not found page</h1>}/>
         </Routes>
       </Container>
-    </div>
+    </>
   );
 };
 
